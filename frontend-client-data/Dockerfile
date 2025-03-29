@@ -10,5 +10,5 @@ COPY . .
 RUN npm run build
 
 EXPOSE 3000
-
+RUN chmod +x /app/frontend-client-data
 CMD ["npm", "start"]

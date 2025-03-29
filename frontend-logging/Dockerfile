@@ -10,5 +10,5 @@ COPY . .
 RUN npm run build
 
 EXPOSE 3001
-
+RUN chmod +x /app/frontend-logging
 CMD ["npm", "start"]

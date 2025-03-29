@@ -4,11 +4,11 @@ import (
 	"database/sql"
 	"encoding/json"
 	"fmt"
-	"github.com/confluentinc/confluent-kafka-go/kafka"
+	//"github.com/confluentinc/confluent-kafka-go/kafka"
 	"net/http"
 
 	"client-data-service/internal/models"
-	//"github.com/segmentio/kafka-go"
+	"github.com/segmentio/kafka-go"
 )
 
 func SubmitHandler(db *sql.DB, producer *kafka.Writer) http.HandlerFunc {
