@@ -1,0 +1,69 @@
+services:
+  db:
+    build: ./db
+    restart: always
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+    ports:
+      - "5432:5432"
+
+  kafka:
+    image: wurstmeister/kafka:latest
+    restart: always
+    environment:
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+    depends_on:
+      - zookeeper
+    ports:
+      - "9092:9092"
+
+  zookeeper:
+    image: wurstmeister/zookeeper
+    restart: always
+    ports:
+      - "2181:2181"
+
+  client-data-service:
+    build: ./client-data-service
+    restart: always
+    depends_on:
+      - db
+      - kafka
+    ports:
+      - "8080:8080"
+
+  logging-service:
+    build: ./logging-service
+    restart: always
+    depends_on:
+      - db
+      - kafka
+    ports:
+      - "8082:8082"
+
+  frontend-client-data:
+    build: ./frontend-client-data
+    restart: always
+    depends_on:
+      - client-data-service
+    ports:
+      - "8081:3000"
+
+  frontend-logging:
+    build: ./frontend-logging
+    restart: always
+    depends_on:
+      - logging-service
+    ports:
+      - "8083:3001"
+
+  nginx:
+    build: ./nginx
+    restart: always
+    depends_on:
+      - frontend-client-data
+      - frontend-logging
+    ports:
+      - "80:80"

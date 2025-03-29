@@ -1,0 +1,15 @@
+server:
+  port: 8082
+
+database:
+  host: db
+  port: 5432
+  user: user
+  password: password
+  name: logs_db
+
+kafka:
+  brokers:
+    - kafka:9092
+  topic: logs
+  group_id: log-consumer-group

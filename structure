@@ -1,0 +1,63 @@
+project-root/
+│── client-data-service/    # Сервис управления клиентскими данными
+│   ├── cmd/
+│   │   └── main.go
+│   ├── internal/
+│   │   ├── database/
+│   │   │   ├── db.go
+│   │   ├── kafka/
+│   │   │   ├── producer.go
+│   │   ├── handlers/
+│   │   │   ├── handlers.go
+│   │   ├── models/
+│   │   │   ├── user.go
+│   ├── config/
+│   │   ├── config.yaml
+│   ├── Dockerfile
+│   ├── go.mod
+│   ├── go.sum
+│   └── main.go
+│
+│── logging-service/        # Сервис логирования
+│   ├── cmd/
+│   │   └── main.go
+│   ├── internal/
+│   │   ├── database/
+│   │   │   ├── db.go
+│   │   ├── kafka/
+│   │   │   ├── consumer.go
+│   │   ├── handlers/
+│   │   │   ├── handlers.go
+│   │   ├── models/
+│   │   │   ├── log.go
+│   ├── config/
+│   │   ├── config.yaml
+│   ├── Dockerfile
+│   ├── go.mod
+│   ├── go.sum
+│   └── main.go
+│
+│── frontend-client-data/   # Фронтенд для клиентского сервиса
+│   ├── src/
+│   │   ├── App.tsx
+│   │   ├── index.tsx
+│   ├── package.json
+│   ├── Dockerfile
+│
+│── frontend-logging/       # Фронтенд для сервиса логирования
+│   ├── src/
+│   │   ├── App.tsx
+│   │   ├── index.tsx
+│   ├── package.json
+│   ├── Dockerfile
+│
+│── nginx/                  # Nginx конфигурация
+│   ├── default.conf
+│   ├── Dockerfile
+│
+│── db/                     # Конфигурация БД
+│   ├── init.sql
+│   ├── Dockerfile
+│
+│── docker-compose.yml      # Композиция сервисов
+│── README.md               # Инструкция по запуску
