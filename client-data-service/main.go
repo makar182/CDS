@@ -1,12 +1,12 @@
 package main
 
 import (
+	"client-data-service/internal/database"
 	"client-data-service/internal/handlers"
 	"client-data-service/internal/kafka"
+	"fmt"
 	"log"
 	"net/http"
-
-	"client-data-service/internal/database"
 )
 
 func main() {
@@ -25,8 +25,14 @@ func main() {
 	defer producer.Close()
 
 	// HTTP маршруты
+	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		fmt.Fprintln(w, "Привет, как дела?")
+	})
+
 	http.HandleFunc("/submit", handlers.SubmitHandler(db, producer))
 
 	log.Println("Сервис управления клиентскими данными запущен на :8080")
+
+	// Запуск HTTP-сервера
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }

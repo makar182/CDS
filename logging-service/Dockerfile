@@ -7,7 +7,7 @@ RUN go mod download
 
 COPY . .
 
-RUN go build -o logging-service ./cmd/main.go
+RUN go build -o logging-service ./main.go
 
 EXPOSE 8082
 RUN chmod +x /app/logging-service
