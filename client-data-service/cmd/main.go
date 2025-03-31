@@ -1,15 +1,15 @@
-package cmd
+package main
 
 import (
+	"client-data-service/internal/handlers"
+	"client-data-service/internal/kafka"
 	"log"
 	"net/http"
 
 	"client-data-service/internal/database"
-	"client-data-service/internal/handlers"
-	"client-data-service/internal/kafka"
 )
 
-func Main() {
+func main() {
 	// Инициализация базы данных
 	db, err := database.InitDB()
 	if err != nil {

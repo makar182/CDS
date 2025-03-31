@@ -1,5 +1,4 @@
-# Строим бинарник на правильной архитектуре
-FROM --platform=linux/arm64 golang:1.21 AS builder
+FROM golang:1.21 AS builder
 
 WORKDIR /app
 
@@ -13,12 +12,19 @@ RUN echo "Building for architecture: $TARGETARCH"
 RUN GOOS=linux GOARCH=arm64 go build -o /app/client-data-service ./cmd/main.go
 
 # Минимальный финальный образ
-FROM --platform=linux/arm64 alpine:latest
+FROM alpine:latest
 
 WORKDIR /root/
 
 COPY --from=builder /app/client-data-service .
 
+# Установим утилиту file
+RUN apk add --no-cache file
+
+# Проверка архитектуры бинарника
+RUN file /root/client-data-service
+
+# Убедитесь, что бинарник имеет права на выполнение
 RUN chmod +x client-data-service
 
 EXPOSE 8080

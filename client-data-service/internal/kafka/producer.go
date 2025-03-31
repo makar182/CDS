@@ -1,9 +1,8 @@
 package kafka
 
 import (
-	"log"
-
 	"github.com/segmentio/kafka-go"
+	"log"
 )
 
 func NewProducer() (*kafka.Writer, error) {
